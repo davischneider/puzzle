@@ -1,0 +1,8 @@
+
+]
+java:S1220""Move this file to a named package.8É£¼¿í1J$cd90167e-f166-46f0-b125-c715c73c3b01
+}
+java:S1854":Remove this useless assignment to local variable "closed".(Ä®ì¯8Í£¼¿í1J$532012d4-308b-410e-9aa3-982e5b5813ba
+n
+java:S1481"+Remove this unused "closed" local variable.(Ä®ì¯8Î£¼¿í1J$e58f3c97-085a-474a-a1e7-f1eda13fde14
+r	java:S106"+Replace this use of System.out by a logger.(›Íï‹øÿÿÿÿ8Ï£¼¿í1J$799fe354-a55d-4cbf-bf31-ebc7ca933f6d
