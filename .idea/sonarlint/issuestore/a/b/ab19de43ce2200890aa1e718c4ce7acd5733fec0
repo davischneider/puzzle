@@ -1,8 +1,13 @@
 
 ]
-java:S1220""Move this file to a named package.8É£¼¿í1J$cd90167e-f166-46f0-b125-c715c73c3b01
+java:S1220""Move this file to a named package.8êµöÀí1J$709e595d-bc4e-491c-82de-a2b683d1ef8d
 }
-java:S1854":Remove this useless assignment to local variable "closed".(Ä®ì¯8Í£¼¿í1J$532012d4-308b-410e-9aa3-982e5b5813ba
+java:S1854":Remove this useless assignment to local variable "closed".(Ä®ì¯8ğµöÀí1J$47b4ee43-d111-46b1-9e16-6fa2514a2118
+
+java:S1854">Remove this useless assignment to local variable "nextStates".(¹¶Éë8˜ÆîÁí1J$f9575bc8-a381-4cf5-b548-a09ee528b25b
+r	java:S106"+Replace this use of System.out by a logger.(“øÙøÿÿÿÿ8ñµöÀí1J$6d3c84a7-a22d-40b9-a4ff-38a327a6d554
 n
-java:S1481"+Remove this unused "closed" local variable.(Ä®ì¯8Î£¼¿í1J$e58f3c97-085a-474a-a1e7-f1eda13fde14
-r	java:S106"+Replace this use of System.out by a logger.(›Íï‹øÿÿÿÿ8Ï£¼¿í1J$799fe354-a55d-4cbf-bf31-ebc7ca933f6d
+java:S1481"+Remove this unused "closed" local variable.(Ä®ì¯8òµöÀí1J$7d12a14e-2f2c-4ee6-88e2-e9064b0922c2
+m	java:S106"+Replace this use of System.out by a logger.(áµè¼8óµöÀí1J$6bc686f8-125a-4685-b157-0288f1f71748
+r
+java:S1481"/Remove this unused "nextStates" local variable.(¹¶Éë8›ÆîÁí1J$4e090ca4-1ae3-4c88-80a2-d4ecb082734e

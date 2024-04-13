@@ -7,8 +7,10 @@ import java.util.Queue;
 public class Application {
 
     public static void main(String[] args) {
-        int[] firstState = {7, 2, 4, 5, 0, 6, 8, 3, 1};
-        int[] goalState = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+        int[][] firstState = {{7, 2, 4}, {5, 0, 6}, {8, 3, 1}};
+        int[][] goalState = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
+
+        System.out.println(firstState[1][0]);
 
         Puzzle puzzle = new Puzzle(firstState);
 
@@ -19,13 +21,13 @@ public class Application {
         while (!open.isEmpty()) {
             Puzzle currentState = open.poll();
 
-            if (Arrays.equals(currentState.getState(), goalState)) {
-                System.out.println("Solução Encontrada: " + Arrays.toString(currentState.getState()));
+            if (Arrays.equals(currentState.state(), goalState)) {
+                System.out.println("Solução Encontrada: " + Arrays.toString(currentState.state()));
                 break;
             }
 
             // Gerar filhos
-
+            List<Puzzle> nextStates = puzzle.nextStates();
 
         }
     }
