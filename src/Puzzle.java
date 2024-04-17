@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
-public record Puzzle(int[][] state) {
+public record Puzzle(int[][] state, Puzzle parent) {
 
     private static final int ROW_INDEX = 0;
     private static final int COLUMN_INDEX = 1;
+
 
     public List<Puzzle> nextStates() {
         List<Puzzle> children = new ArrayList<>();
@@ -18,22 +20,32 @@ public record Puzzle(int[][] state) {
         int emptyColumn = emptySpace[COLUMN_INDEX];
 
         if (emptyRow > 0) {
-            children.add(new Puzzle(moveUp(emptyRow, emptyColumn, state)));
+            children.add(new Puzzle(moveUp(emptyRow, emptyColumn, state), this));
         }
 
         if (emptyRow < 2) {
-            children.add(new Puzzle(moveDown(emptyRow, emptyColumn, state)));
+            children.add(new Puzzle(moveDown(emptyRow, emptyColumn, state), this));
         }
 
         if (emptyColumn > 0) {
-            children.add(new Puzzle(moveLeft(emptyRow, emptyColumn, state)));
+            children.add(new Puzzle(moveLeft(emptyRow, emptyColumn, state), this));
         }
 
         if (emptyColumn < 2) {
-            children.add(new Puzzle(moveRight(emptyRow, emptyColumn, state)));
+            children.add(new Puzzle(moveRight(emptyRow, emptyColumn, state), this));
         }
 
         return children;
+    }
+
+    public List<Puzzle> getSuccesPath(Puzzle successPuzzle) {
+        List<Puzzle> puzzles = new ArrayList<>();
+        Puzzle inAnalisys = successPuzzle;
+        while (!Objects.isNull(inAnalisys)) {
+            puzzles.add(inAnalisys);
+            inAnalisys = inAnalisys.parent();
+        }
+        return puzzles;
     }
 
     private int[] getEmptyPosition() {
@@ -90,7 +102,7 @@ public record Puzzle(int[][] state) {
         childState[emptyRow][emptyColumn] = rightValue;
         return childState;
     }
-    
+
     private int[][] getClonedState(int[][] state) {
         return Arrays.stream(state).map(int[]::clone).toArray(int[][]::new);
     }
