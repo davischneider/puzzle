@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public record Puzzle(int[][] state, Puzzle parent) {
+public record Puzzle(int[][] state, Puzzle parent, int[][] goalState) {
 
     private static final int ROW_INDEX = 0;
     private static final int COLUMN_INDEX = 1;
@@ -20,19 +20,19 @@ public record Puzzle(int[][] state, Puzzle parent) {
         int emptyColumn = emptySpace[COLUMN_INDEX];
 
         if (emptyRow > 0) {
-            children.add(new Puzzle(moveUp(emptyRow, emptyColumn, state), this));
+            children.add(new Puzzle(moveUp(emptyRow, emptyColumn, state), this, goalState));
         }
 
         if (emptyRow < 2) {
-            children.add(new Puzzle(moveDown(emptyRow, emptyColumn, state), this));
+            children.add(new Puzzle(moveDown(emptyRow, emptyColumn, state), this, goalState));
         }
 
         if (emptyColumn > 0) {
-            children.add(new Puzzle(moveLeft(emptyRow, emptyColumn, state), this));
+            children.add(new Puzzle(moveLeft(emptyRow, emptyColumn, state), this, goalState));
         }
 
         if (emptyColumn < 2) {
-            children.add(new Puzzle(moveRight(emptyRow, emptyColumn, state), this));
+            children.add(new Puzzle(moveRight(emptyRow, emptyColumn, state), this, goalState));
         }
 
         return children;
@@ -105,6 +105,45 @@ public record Puzzle(int[][] state, Puzzle parent) {
 
     private int[][] getClonedState(int[][] state) {
         return Arrays.stream(state).map(int[]::clone).toArray(int[][]::new);
+    }
+
+    public int getFinalDistance() {
+        return manhattanDistance() + getPathLength();
+    }
+
+    private int manhattanDistance() {
+        int distance = 0;
+        for (int row = 0; row < state.length; row++) {
+            for (int col = 0; col < state[row].length; col++) {
+                int value = state[row][col];
+                if (value != 0) {
+                    int[] goalPosition = findPosition(value, goalState);
+                    distance += Math.abs(row - goalPosition[0]) + Math.abs(col - goalPosition[1]);
+                }
+            }
+        }
+        return distance;
+    }
+
+    private int[] findPosition(int value, int[][] state) {
+        for (int row = 0; row < state.length; row++) {
+            for (int col = 0; col < state[row].length; col++) {
+                if (state[row][col] == value) {
+                    return new int[]{row, col};
+                }
+            }
+        }
+        throw new IllegalArgumentException("Value " + value + " not found in the given state");
+    }
+
+    private int getPathLength() {
+        int length = 0;
+        Puzzle current = this;
+        while (current.parent != null) {
+            length++;
+            current = current.parent;
+        }
+        return length;
     }
 
     @Override

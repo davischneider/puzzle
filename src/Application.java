@@ -1,20 +1,19 @@
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+import java.util.PriorityQueue;
 
 public class Application {
 
     public static void main(String[] args) {
         int[][] firstState = {{2, 1, 3}, {8, 0, 4}, {7, 5, 6}};
         int[][] goalState = {{1, 2, 3}, {8, 0, 4}, {7, 6, 5}};
-//        int[][] goalState = {{1, 2, 3}, {4, 5, 6}, {7, 8, 0}};
 
-        Puzzle puzzle = new Puzzle(firstState, null);
+        Puzzle puzzle = new Puzzle(firstState, null, goalState);
 
         HashSet<String> closed = new HashSet<>();
-        Queue<Puzzle> open = new LinkedList<>();
+        PriorityQueue<Puzzle> open = new PriorityQueue<>(Comparator.comparingInt(Puzzle::getFinalDistance));
         open.add(puzzle);
 
         while (!open.isEmpty()) {
